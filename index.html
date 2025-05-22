@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devanshi Saraswat - Project Manager Portfolio</title>
+  <style>
+    /* Custom CSS for professional styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      background-color: #f1f5f9; /* Soft blue-gray, complementary to header */
+      min-height: 100vh;
+    }
+
+    nav {
+      background-color: #1f2a44; /* Dark navy */
+      color: #fff;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav .container {
+      max-width: 1024px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #60a5fa; /* hover:text-blue-400 */
+    }
+
+    section {
+      padding: 3rem 1rem;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      max-width: 1024px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 1.875rem;
+      font-weight: bold;
+      color: #1f2a44; /* text-gray-800 */
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #374151; /* text-gray-700 */
+    }
+
+    p {
+      font-size: 1rem;
+      color: #4b5563; /* text-gray-600 */
+      line-height: 1.625;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: linear-gradient(to right, #374151, #4f46e5); /* Aligned with header */
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .hero p.description {
+      font-size: 1.125rem;
+      max-width: 42rem;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero a {
+      display: inline-block;
+      background-color: #fff;
+      color: #1f2a44; /* Matches header */
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .hero a:hover {
+      background-color: #dbeafe; /* hover:bg-blue-100 */
+      transform: scale(1.05);
+    }
+
+    .card {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .card p.date {
+      color: #6b7280; /* text-gray-500 */
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      color: #4b5563; /* text-gray-600 */
+      margin-top: 0.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .skill-card {
+      background-color: #eff6ff; /* bg-blue-50 */
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      color: #374151; /* text-gray-700 */
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s ease, transform 0.8s ease, scale 0.3s ease;
+    }
+
+    .skill-card.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .skill-card:hover {
+      transform: scale(1.05);
+    }
+
+    .contact-form {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 1.5rem;
+    }
+
+    .contact-form label {
+      display: block;
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db; /* border-gray-300 */
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .contact-form button {
+      background-color: #1f2a44; /* Matches header */
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background-color: #374151; /* Slightly lighter navy */
+    }
+
+    .contact p a {
+      color: #2563eb; /* text-blue-600 */
+      text-decoration: none;
+      transition: text-decoration 0.3s ease;
+    }
+
+    .contact p a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #1f2a44; /* Matches header */
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .linkedin-icon {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      transition: fill 0.3s ease;
+    }
+
+    .linkedin-icon:hover {
+      fill: #60a5fa;
+    }
+
+    @media (min-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <h1>Devanshi Saraswat</h1>
+      <div>
+        <a href="#home" aria-label="Home section">Home</a>
+        <a href="#about" aria-label="About section">About</a>
+        <a href="#experience" aria-label="Experience section">Experience</a>
+        <a href="#education" aria-label="Education section">Education</a>
+        <a href="#skills" aria-label="Skills section">Skills</a>
+        <a href="#achievements" aria-label="Achievements section">Achievements</a>
+        <a href="#certifications" aria-label="Certifications section">Certifications</a>
+        <a href="#contact" aria-label="Contact section">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Devanshi Saraswat</h1>
+      <p>Project Manager | IT & ERP Specialist</p>
+      <p class="description">
+        Results-driven Project Manager with over 5 years of experience leading cross-functional teams in ERP implementations and cloud solutions. Certified in Agile and Predictive Project Management, passionate about driving innovation and delivering projects on time and within budget.
+      </p>
+      <a href="#contact">Get in Touch</a>
+      <a href="https://devanshi-resume.tiiny.site" download="Devanshi_Saraswat_Resume.pdf">Download Resume</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>
+        I am a dedicated IT Project Manager with a strong background in technology and education, specializing in end-to-end project execution, Agile methodologies, and ERP solutions. I excel at leading cross-functional teams, optimizing processes, and delivering high-quality results. My expertise includes SAP S/4HANA, AWS, and Power BI, with a passion for fostering innovation and stakeholder collaboration.
+      </p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="container">
+      <h2>Professional Experience</h2>
+      <div class="card">
+        <h3>Project Manager, Efficient INDIA</h3>
+        <p class="date">08/2024 - Present | Delhi, India</p>
+        <ul>
+          <li>Led a team of 11 to deliver ERP implementations, reducing deployment time by 20%.</li>
+          <li>Managed $500K project budgets, achieving 15% cost savings through optimized resource allocation.</li>
+          <li>Designed cloud-based ERP solutions on AWS and Azure, ensuring compliance and disaster recovery.</li>
+          <li>Implemented Agile methodologies (Scrum, Kanban), improving sprint delivery efficiency by 15%.</li>
+          <li>Integrated SAP systems with third-party applications using MuleSoft and REST/SOAP APIs.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Manager, DEV IT SERV PVT. LTD.</h3>
+        <p class="date">09/2023 - 08/2024 | Gurugram, Haryana, India</p>
+        <ul>
+          <li>Spearheaded IT projects using Agile, delivering 95% of projects on time and within scope.</li>
+          <li>Optimized DevOps pipelines, reducing incident resolution time by 25%.</li>
+          <li>Engaged stakeholders to align project goals, achieving 100% client satisfaction.</li>
+          <li>Utilized Power BI and Tableau for data-driven insights, enhancing KPIs by 10%.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Project Manager, India HIV/AIDS Alliance</h3>
+        <p class="date">07/2022 - 09/2023 | India</p>
+        <ul>
+          <li>Developed WHO-aligned strategic plans for HIV/AIDS projects, achieving 90% milestone completion.</li>
+          <li>Managed $300K budgets, ensuring financial compliance and resource optimization.</li>
+          <li>Trained 50+ healthcare workers, improving program delivery by 30%.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Social Media Manager, SupremeWork</h3>
+        <p class="date">04/2022 - 07/2022 | Noida, Uttar Pradesh, India</p>
+        <ul>
+          <li>Leveraged analytics to boost IT project visibility by 25% through social media campaigns.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Executive Director, Bachpan Foundation</h3>
+        <p class="date">04/2021 - 04/2022 | Noida, Uttar Pradesh, India</p>
+        <ul>
+          <li>Established a project management framework, aligning IT initiatives with organizational goals.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Mathematics Teacher & School Coordinator</h3>
+        <p class="date">05/2018 - 03/2020 | Kota, Rajasthan, India</p>
+        <ul>
+          <li>Taught mathematics to 100+ students and coordinated school operations, improving efficiency by 10%.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Master’s Degree, Physics</h3>
+        <p class="date">University of Kota, Rajasthan, India | 01/2018 - 01/2020</p>
+        <ul>
+          <li>Specialized in computational physics, quantum mechanics, and data analysis.</li>
+          <li>Conducted experimental research using statistical methods and simulations.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>BSc, Mathematics</h3>
+        <p class="date">University of Kota, Rajasthan, India | 01/2015 - 01/2018</p>
+        <ul>
+          <li>Mastered algebra, calculus, and mathematical modeling for problem-solving.</li>
+          <li>Developed analytical thinking through rigorous coursework.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">Project Management</div>
+        <div class="skill-card">Agile Methodologies (Scrum, Kanban, SAFe)</div>
+        <div class="skill-card">ERP Solutions (SAP, Oracle, Microsoft Dynamics)</div>
+        <div class="skill-card">Cloud Technologies (AWS, Azure, Google Cloud)</div>
+        <div class="skill-card">Business Intelligence (Power BI, Tableau)</div>
+        <div class="skill-card">Data Migration (SAP BODS, LSMW, ETL)</div>
+        <div class="skill-card">Integration (SAP PI/PO, MuleSoft, REST/SOAP APIs)</div>
+        <div class="skill-card">Stakeholder Management</div>
+        <div class="skill-card">Team Leadership</div>
+        <div class="skill-card">SQL</div>
+        <div class="skill-card">Analytical Skills</div>
+        <div class="skill-card">Digital Marketing</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <div class="container">
+      <h2>Achievements</h2>
+      <div class="card">
+        <h3>ICAR Robotics Track Sprayer Project (Project Lead)</h3>
+        <ul>
+          <li>Led development of an AI-based sprayer, reducing chemical waste by 30%.</li>
+          <li>Implemented wireless control and vision processing for precision agriculture.</li>
+          <li>Improved spraying accuracy, minimizing manual labor and operational costs.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ERP Implementation Success</h3>
+        <ul>
+          <li>Reduced operational costs by 15% through cloud-based ERP deployments.</li>
+          <li>Enhanced team productivity by 20% via Agile methodology adoption.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="container">
+      <h2>Certifications</h2>
+      <div class="card">
+        <ul>
+          <li>Agile Project Management Badge | Professional Association for Project Management | 09/2024</li>
+          <li>Predictive Project Management Badge | Professional Association for Project Management | 09/2024</li>
+          <li>Microsoft Office Specialist Training | Microsoft | 03/2021</li>
+          <li>Fundamental Digital Marketing | Digital Marketing Institute | 10/2018</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Feel free to reach out for collaboration or inquiries!</p>
+      <p>Email: <a href="mailto:saraswatdivyanshi29@gmail.com" aria-label="Email Devanshi Saraswat">saraswatdivyanshi29@gmail.com</a></p>
+      <p>Phone: <a href="tel:+919079004833" aria-label="Call Devanshi Saraswat">+91 9079004833</a></p>
+      <p>Location: New Delhi, Delhi, India</p>
+      <p><a href="https://linkedin.com/in/devanshi-saraswat-bb6a0620a" aria-label="LinkedIn Profile">LinkedIn Profile</a></p>
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your Name">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Your Email">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required placeholder="Your Message"></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Devanshi Saraswat. All rights reserved.</p>
+    <a href="https://linkedin.com/in/devanshi-saraswat-bb6a0620a" aria-label="LinkedIn Profile">
+      <svg class="linkedin-icon" viewBox="0 0 24 24">
+        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+      </svg>
+    </a>
+  </footer>
+
+  <script>
+    // JavaScript for scroll-based animations
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section');
+      const skillCards = document.querySelectorAll('.skill-card');
+
+      const observerOptions = {
+        root: null,
+        threshold: 0.1,
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => sectionObserver.observe(section));
+      skillCards.forEach((card) => skillObserver.observe(card));
+
+      console.log('Page loaded and observers set up');
+    });
+  </script>
+</body>
+</html>
